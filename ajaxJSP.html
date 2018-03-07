@@ -1,0 +1,27 @@
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+function check(){
+	
+	var username=form1.user.value;
+	var password=form1.pass.value;
+	
+	$.get('ajaxJSP.jsp', {user:username,pass:password},function(responseText)
+	{
+		$('#div1').text(responseText);
+	});
+
+}
+</script>
+</head>
+
+<body>
+<form id="form1">
+USER NAME:<input type="text" id="user"/><br>
+PASSWORD:<input type="password" id="pass"/><br>
+<input type="button" onclick="check()" id="submit" value="LOGIN"/>
+<div style="color:red;" id="div1"></div>
+</form>
+</body>
+</html>
