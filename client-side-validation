@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User validation</title>
+	<script type="text/javascript">
+		// name 
+		function validate()
+		{
+			var name = document.getElementById('name').value;
+			var pattern = /^[A-Za-z]/;
+			if(name==="")
+				alert("Name cannot be empty");
+			else if(!pattern.test(name))
+				alert("Name should start with alphabet");
+
+			var pwd = document.getElementById('pwd').value;
+			pattern = /[A-Za-z0-9$]/;
+			if(pwd==="")
+				alert("Password cannot be empty");
+			else if(pwd.length<8)
+				alert("Password must be minimum 8 characters");
+			else if(!pattern.test(pwd))
+				alert("Password must have a pattern");
+			
+			var pat = /^[a-zA-Z]+@[a-zA-Z]+.[a-z]{2,3}$/;
+			var mail = document.getElementById('mail').value;
+			if(mail==="")
+				alert("Mail cannot be empty");
+
+			var num = document.getElementById('num').value;
+			if(num==="")
+				alert("Number cannot be empty");
+			else if(num.length!=10)
+				alert("Enter a 10 digit number");
+			else if(!pattern.test(pwd))
+				alert("example@email.com");
+
+			if(!document.getElementById('sex').checked)
+				alert("Select a gender");
+
+			if(!document.getElementById('lang').checked )
+				alert("Choose the Languages");
+		}
+	</script>
+</head>
+<body>
+<form>
+Enter Name: <input type="text" id="name"/><br>
+Enter Password: <input type="password" id="pwd"/><br>
+Enter Email: <input type="email" id="email"/><br>
+Enter mobile Number: <input type="number" id="num"/><br>
+Gender:
+<input type="radio" id="sex" name="sex"/>Male
+<input type="radio" id="sex"  name="sex"/>Female
+<br>Select Languages you know:
+<input type="checkbox" id="lang" name="lang"/>C
+<input type="checkbox" id="lang" name="lang"/>C++
+<input type="checkbox" id="lang" name="lang"/>Java
+<br>
+<input type="submit" onclick="validate()" value="Submit"/>
+</form>
+</body>
+</html>
