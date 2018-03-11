@@ -169,8 +169,6 @@ CREATE TABLE `product` (
   `stock` int(11) DEFAULT NULL,
   `image` blob,
   PRIMARY KEY (`productId`),
-  KEY `fk_did_idx` (`dealerId`),
-  KEY `fk_cid_idx` (`categoryId`),
   CONSTRAINT `fk_cid` FOREIGN KEY (`categoryId`) REFERENCES `category` (`categoryId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_did` FOREIGN KEY (`dealerId`) REFERENCES `dealer` (`dealerId`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -193,7 +191,7 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `userId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL AUTO_INCREMENT,
   `password` varchar(45) NOT NULL,
   `name` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
