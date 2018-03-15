@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Request</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    
+    <script type="text/javascript">
+
+        $(document).ready(function(e) {   
+            $('.qty').change(function(){
+                updateCost(this);
+            });
+
+            $('.delete').click(function(){
+                deleteItem(this);
+            });             
+
+        });
+
+        function deleteItem(input){
+             var productRow = $(input).parent().parent();
+             productRow.slideUp(200, function() {
+             // make an ajax call to delete these details from the table
+             productRow.remove();
+             recalculateCart();
+           });
+        }
+
+        function updateCost(input) {
+            var row = $(input).parent().parent();
+            var price = parseFloat(row.children('.price-div').children('.price').text());
+            var quantity = $(input).val();
+            var linePrice = price * quantity;
+            row.children('.total-div').children('.total').text(linePrice.toFixed(2));
+            recalculateCart();
+        }
+
+        function recalculateCart() {
+            var fin_qty = 0;
+            var fin_total = 0;
+
+            $('.total-div').each(function () {
+                fin_total += parseFloat($(this).children('.total').text());
+            });
+
+            $('.qty-div').each(function () {
+                fin_qty += parseFloat($(this).children('.qty').val());
+            });
+
+            var row = $('.payment');
+            row.children('.fin-qty-div').text(fin_qty);
+            row.children('.fin-total-div').text(fin_total.toFixed(2));
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1>Shopping Cart</h1><br>
+    <div class="row prodcut" style="margin-left:5%;border-radius:  4px;width: 90%;padding: 1%; margin-bottom: 1%;">
+        <div class="col-sm-2">
+             <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg" class="img-responsive" width="150">
+        </div>
+        <div class="col-sm-4">
+            <h2>Prodcut title</h2> 
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+        </div>
+        <div class="col-sm-2 price-div">
+            <label class="price" >400</label>
+        </div>
+        <div class="col-sm-1 qty-div">
+            <input class="qty" type="number" name="qty" value="1" style="width:45%;"/>
+        </div>
+        <div class="col-sm-2 total-div">
+            <label class="total">400</label>
+        </div>
+        <div class="col-sm-1">
+            <button class="fa fa-trash btn btn-danger delete"></button>
+        </div>
+        <hr style="height:1px;border:none;color:#333;background-color:#333;" width="90%">
+    </div>
+
+    <div class="row prodcut" style="margin-left:5%;border-radius:  4px;width: 90%;padding: 1%; margin-bottom: 1%;">
+        <div class="col-sm-2">
+             <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg" class="img-responsive" width="150">
+        </div>
+        <div class="col-sm-4">
+            <h2>Prodcut title</h2> 
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+        </div>
+        <div class="col-sm-2 price-div">
+            <label class="price" >400</label>
+        </div>
+        <div class="col-sm-1 qty-div">
+            <input class="qty" type="number" name="qty" value="1" style="width:45%;"/>
+        </div>
+        <div class="col-sm-2 total-div">
+            <label class="total">400</label>
+        </div>
+        <div class="col-sm-1">
+            <button class="fa fa-trash btn btn-danger delete"></button>
+        </div>
+        <hr style="height:1px;border:none;color:#333;background-color:#333;" width="90%">
+    </div>
+
+    <div class="row prodcut" style="margin-left:5%;border-radius:  4px;width: 90%;padding: 1%; margin-bottom: 1%;">
+        <div class="col-sm-2">
+             <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg" class="img-responsive" width="150">
+        </div>
+        <div class="col-sm-4">
+            <h2>Prodcut title</h2> 
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+        </div>
+        <div class="col-sm-2 price-div">
+            <label class="price" >400</label>
+        </div>
+        <div class="col-sm-1 qty-div">
+            <input class="qty" type="number" name="qty" value="1" style="width:45%;"/>
+        </div>
+        <div class="col-sm-2 total-div">
+            <label class="total">400</label>
+        </div>
+        <div class="col-sm-1">
+            <button class="fa fa-trash btn btn-danger delete"></button>
+        </div>
+        <hr style="height:1px;border:none;color:#333;background-color:#333;" width="90%">
+    </div>
+
+    <div class="row prodcut" style="margin-left:5%;border-radius:  4px;width: 90%;padding: 1%; margin-bottom: 1%;">
+        <div class="col-sm-2">
+             <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg" class="img-responsive" width="150">
+        </div>
+        <div class="col-sm-4">
+            <h2>Prodcut title</h2> 
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+        </div>
+        <div class="col-sm-2 price-div">
+            <label class="price" >400</label>
+        </div>
+        <div class="col-sm-1 qty-div">
+            <input class="qty" type="number" name="qty" value="1" style="width:45%;"/>
+        </div>
+        <div class="col-sm-2 total-div">
+            <label class="total">400</label>
+        </div>
+        <div class="col-sm-1">
+            <button class="fa fa-trash btn btn-danger delete"></button>
+        </div>
+        <hr style="height:1px;border:none;color:#333;background-color:#333;" width="90%">
+    </div>
+
+    <div class="row payment" style="margin-left:5%;border-radius:  4px;width: 90%;padding: 1%; margin-bottom: 1%;">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2">
+            <h2>Total</h2>
+        </div>
+        <div class="col-sm-1 fin-qty-div">4</div>
+        <div class="col-sm-1 fin-total-div">1600</div>
+       
+        <div class="col-sm-2">
+            <a href="#" class="btn btn-success btn-lg">save</a>
+            <a href="payment.html" class="btn btn-info btn-lg">pay</a>
+        </div>
+    </div>
+</body>
+</html>

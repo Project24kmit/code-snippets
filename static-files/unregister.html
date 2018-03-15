@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Request</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="#"><i class="fa fa-user fa-3x"></i></a>
+                </li>
+                <li>
+                    <a href="request.html">inbox <span class="badge badge-primary">3</span></a>
+                </li>
+                <li>
+                    <a href="viewDealer.html">View dealer</a>
+                </li>
+                <li>
+                    <a href="unregister.html">Unregister dealer</a>
+                </li>
+                <li>
+                    <a href="#">Sales report</a>
+                </li>
+                <li>
+                    <a href="#">Stock report</a>
+                </li>
+                <li>
+                    <a href="#">Edit profile</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle"><i class="fa fa-bars"></i></a>
+                <span style="margin-left: 39%;font-weight: bold;">Unregister a dealer</span>
+            <div class="container-fluid">
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+		<div class="container-fluid">
+            <div class="form-group col-lg-3" style="margin-left:35%;">
+                <input  name="did" type="number" required placeholder="Enter dealer ID" class="form-control dealer-id">
+            </div>
+
+            <div class="row remove-dealer" style="background-color: lightgrey;margin-left:5%;border-radius:  4px;width: 90%;padding: 1%; margin-bottom: 1%;">
+                <div class="col-sm-2">
+                     <p>DealerId# <span class="badge badge-primary ">1</span></p>
+                </div>
+                <div class="col-sm-6">
+                    <h2>Manisha Rao</h2> 
+                    <ul class="list-unstyled">
+                      <li> <i class="fa fa-phone"></i> 916-241-3613</li>
+                      <li> <i class="fa fa-envelope"></i> jonniespratley@me.com</li>
+                      <li> <i class="fa fa-address-card"></i> 3-3-988,Sethu Manohar Niwas,Kutbiguda,Hyderabad,Telangna-500027</li>
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <h5><u>List of products sold</u></h5>
+                    <ul class="multiselect">
+                        <li>product name1</li>
+                        <li>product name2</li>
+                        <li>product name3</li>
+                        <li>product name4</li>
+                        <li>product name5</li>
+                        <li>product name6</li>
+                        <li>product name7</li>
+                    </ul>
+                </div>
+            </div>
+            <button type="submit" style="margin-left: 45%;" class="btn btn-danger remove-dealer">Confirm Delete</button>
+        </div>
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+    $(document).ready(function(e){
+        $('.remove-dealer').hide();
+        $('.dealer-id').focusout(function(){
+            // get the record from the database and update the dom
+            var details = 1;
+            // if details are given then show other wise error message
+            $('.remove-dealer').show();
+        });
+    });
+    </script>
+
+</body>
+
+</html>
