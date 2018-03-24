@@ -14,6 +14,7 @@
         <div id="page-content-wrapper">
                 <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle"><i class="fa fa-bars"></i></a>
                 <span class="dealer-notifications">Unregister a dealer</span>
+                <button class="btn btn-primary logout">Logout</button>
         </div>
         <!-- /#page-content-wrapper -->
 
@@ -40,13 +41,15 @@
                         </c:if>
 
                         <div class="form-group col-lg-3" style="margin-left:35%;">
-                            <input  name="did" type="number" required placeholder="Enter dealer ID" class="form-control dealer-id">
+                            <input  name="did" type="number" autofocus required placeholder="Enter dealer ID" class="form-control dealer-id">
                         </div>
-                        <div><input type="submit" style="margin-left: 40%;" name="action" class="btn btn-info" value="getDealer"></div>
+                        <div>
+                        	<input type="submit" style="margin-left: 40%;" name="action" class="btn btn-info" value="getDealer">
+                        </div>
                     </c:when>
 
                     <c:otherwise>
-                        <div class="row remove-dealer request-row">
+                        <div class="row remove-dealer request-row alert alert-info ">
                             <div class="col-sm-2">
                                  DealerId <input type="text" name="did" class="readonly" readonly value="${dealer.getCredentials().getUsername()}">
                             </div>
@@ -58,16 +61,26 @@
                                   <li> <i class="fa fa-address-card"></i> ${dealer.getContactDetails().getAddress()}</li>
                                 </ul>
                             </div>
-                            <div class="col-sm-4">
-                                <h5><u>List of products sold</u></h5>
-                                <ul class="multiselect">
-                                    <c:forEach var="product" items="${dealer.getProducts()}">
-                                        <li>${product.getProductName()}</li>
-                                    </c:forEach>
-                                </ul>
-                            </div>
+                            <c:choose>
+                                <c:when test="${not empty dealer.getProducts()}">
+                                    <div class="col-sm-4">
+                                        <h5>List of products sold</h5>
+                                        <ul class="multiselect">
+                                            <c:forEach var="product" items="${dealer.getProducts()}">
+                                                <li>${product.getProductName()}</li>
+                                            </c:forEach>
+                                        </ul>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="col-sm-4">
+                                        <p class="alert alert-info">No products to display</p>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
-                        <input type="submit" style="margin-left: 45%;" name="action" class="btn btn-danger remove-dealer" value="unregisterDealer">
+                        <textarea autofocus style="margin-left: 30%;" name="reason" required placeholder="Enter the reason to unregister the dealer" rows="3" cols="80"></textarea><br>
+                        <input type="submit" style="margin-left: 45%;" name="action" class="btn btn-danger remove-dealer" value="Unregister">
                     </c:otherwise>
                 </c:choose>
         </div>

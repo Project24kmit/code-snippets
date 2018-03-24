@@ -10,8 +10,11 @@
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
-                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle"><i class="fa fa-bars"></i></a>
-                <span class="dealer-notifications">Dealer Requests notifications</span>           
+                <form action="/logout">
+                    <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle"><i class="fa fa-bars"></i></a>
+                    <span class="dealer-notifications">Dealer Requests</span>   
+                    <button class="btn btn-primary logout">Logout</button>        
+                </form>
         </div>
         <!-- /#page-content-wrapper -->
 		
@@ -19,9 +22,9 @@
             <c:choose>
                 <c:when test="${not empty requestList}">
                     <c:forEach var="request" items="${requestList}">
-                        <div class="row request-row" id="record">
+                        <div class="row request-row" style="background-color:lightgrey;" id="record">
                             <div class="col-sm-2">
-                                 <p>RequestId# <span class="badge badge-primary" id="rid">${request.getRequestId()}</span></p>
+                                 <p>Request Id <span class="badge badge-primary" id="rid">${request.getRequestId()}</span></p>
                             </div>
                             <div class="col-sm-6">
                                 <h2>${request.getName()}</h2> 

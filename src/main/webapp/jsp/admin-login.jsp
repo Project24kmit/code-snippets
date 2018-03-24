@@ -4,13 +4,14 @@
 <jsp:include page="head.jsp"></jsp:include>
 
 <body>
+	<jsp:include page="navbar-without-buttons.jsp"></jsp:include>
 	<div class="container">
 		<form method="post" action="/admin">
 			<div class="row">
 				<div class="form-group">
 					<div class="col-md">
 						<label for="admin">Enter ID</label>
-						<input type="text" class="form-control" id="admin" name="admin" placeholder="Enter ID" required>
+						<input type="text" autofocus class="form-control" id="admin" name="admin" placeholder="Enter ID" required>
 					</div>
 				</div>
 			</div>

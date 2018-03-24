@@ -3,6 +3,7 @@ package com.pmp.servlets;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.UUID;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pmp.elements.*;
 import com.pmp.services.UserService;
 import com.pmp.sql.DatabaseConnector;
 
@@ -18,77 +20,65 @@ public class UserServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	Connection dbconnection;
-	UserService userService = new UserService();
-
+	Connection dbconnection = DatabaseConnector.getDBConnection();
+	UserService userService = new UserService(dbconnection);	
+		
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-				if(request.getSession().getAttribute("userId")!=null)
-					request.getRequestDispatcher("jsp/user-home-page.jsp").forward(request, response);
-				else
-					request.getRequestDispatcher("jsp/home-page.jsp").forward(request, response);
-
+				// temporary fix
+		request.getRequestDispatcher("jsp/dummy.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String action = request.getParameter("action");
-		if(action.equals("loginUser"))
-			login(request,response);
-		else if(action.equals("registerUser"))
-			register(request,response);
-	}
-
-	private void register(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		String firstName = request.getParameter("firstName");
-		String lastName = request.getParameter("lastName");
-		String address = request.getParameter("address");
-		String mobile = request.getParameter("mobile");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		
-		dbconnection = DatabaseConnector.getDBConnection();
-		int result = userService.insertUserDetails(firstName,lastName,address,mobile,email,password,dbconnection);
-		String message = "";
-		
-		if(result!=-1)
-			message = result+"" ;
-		else
-			message = "Error";
-        request.setAttribute("message", message);
-		request.getRequestDispatcher("jsp/user-registration-page.jsp").forward(request, response);
-	}
-
-	private void login(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		int userId = Integer.parseInt(request.getParameter("uid"));
-		String password = request.getParameter("upassword");
-		
-		dbconnection = DatabaseConnector.getDBConnection();
-		boolean isUserValid = userService.isUserValid(userId, password, dbconnection);
-		if (isUserValid) 
+		if(request.getParameter("cart")!=null)
 		{
-			request.getSession().setAttribute("userId", userId);
-			request.getSession().setAttribute("csrfToken", generateCSRFToken());
-			String sessionid = request.getSession().getId();
-			response.setHeader("Set-Cookie", "JSESSIONID=" + sessionid + ";");
-			doGet(request, response);
-		} 
-		else 
-		{
-			request.setAttribute("error", "Invalid credientials");
-			request.getRequestDispatcher("jsp/home-page.jsp").forward(request, response);
-
+			int userId = Integer.parseInt(request.getParameter("uid"));
+			List<Order> orders = userService.getAllOrders(userId);
+			request.setAttribute("orderList",orders);
+			request.getRequestDispatcher("jsp/cart-page.jsp").forward(request,response);
+			
 		}
-	}
 
-	public static String generateCSRFToken() {
-		String token = UUID.randomUUID().toString();
-		return token;
-	}
+		else if(request.getParameter("checkout")!=null)
+		{
+			String amount = request.getParameter("amount");
+			request.setAttribute("amount",amount);
+			request.getRequestDispatcher("jsp/checkout.jsp").forward(request, response);
+		}
 
+		else if(request.getParameter("action").equals("buy"))
+		{
+			// get all order information
+			// int userId=1;
+			// userService.buyProduct();
+			String amount = request.getParameter("amount");
+			request.setAttribute("amount",amount);
+			request.getRequestDispatcher("jsp/checkout.jsp").forward(request, response);	
+		}
+
+		else if(request.getParameter("action").equals("addToCart"))
+		{
+			// get all order information
+			// int userId=1;
+			// userService.buyProduct();
+		}
+
+		else if(request.getParameter("action").equals("deleteItem"))
+		{
+			int transactionId = Integer.parseInt(request.getParameter("tid"));
+			userService.deleteTransaction(transactionId);
+		} 
+
+		else if(request.getParameter("action").equals("updateItem"))
+		{
+			int transactionId = Integer.parseInt(request.getParameter("tid"));
+			int quantity = Integer.parseInt(request.getParameter("qty"));
+			userService.updateTransaction(transactionId,quantity);
+		}		
+
+		
+	}
 }
+

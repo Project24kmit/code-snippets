@@ -5,6 +5,7 @@ import java.util.List;
 public class Category {
 
 	private int categoryId;
+	private int dealerId;	
 	private String categoryName;
 	private List<Product> products;
 
@@ -14,6 +15,14 @@ public class Category {
 
 	public int getCategoryId() {
 		return categoryId;
+	}
+
+	public void setDealerId(int dealerId) {
+		this.dealerId = dealerId;
+	}
+
+	public int getDealerId() {
+		return dealerId;
 	}
 
 	public void setCategoryName(String categoryName) {

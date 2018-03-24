@@ -5,6 +5,7 @@ import java.util.List;
 public class Dealer extends User {
 
 	private int requestId;
+	private String company;
 	private List<Category> categories;
 	private List<Product> products;
 
@@ -32,4 +33,11 @@ public class Dealer extends User {
 		return requestId;
 	}
 
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getCompany() {
+		return company;
+	}
 }

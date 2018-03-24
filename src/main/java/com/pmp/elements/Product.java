@@ -4,10 +4,12 @@ public class Product {
 
 	private int productId;
 	private int categoryId;
+	private int dealerId;
 	private String productName;
 	private String productDescription;
-	private Double cost;
+	private Float cost;
 	private int stockQuantity;
+	private String imageFilePath;
 
 	public void setProductId(int productId) {
 		this.productId = productId;
@@ -23,6 +25,14 @@ public class Product {
 
 	public int getCategoryId() {
 		return categoryId;
+	}
+
+	public void setDealerId(int dealerId) {
+		this.dealerId = dealerId;
+	}
+
+	public int getDealerId() {
+		return dealerId;
 	}
 
 	public void setProductName(String productName) {
@@ -41,11 +51,11 @@ public class Product {
 		return productDescription;
 	}
 
-	public void setCost(Double cost) {
+	public void setCost(Float cost) {
 		this.cost = cost;
 	}
 
-	public Double getCost() {
+	public Float getCost() {
 		return cost;
 	}
 
@@ -56,4 +66,13 @@ public class Product {
 	public int getStockQuantity() {
 		return stockQuantity;
 	}
+
+	public void setImageFilePath(String imageFilePath) {
+		this.imageFilePath = imageFilePath;
+	}
+
+	public String getImageFilePath() {
+		return imageFilePath;
+	}
 }
+

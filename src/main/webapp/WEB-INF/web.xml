@@ -6,6 +6,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
+
+	<display-name>Purchase Management Portal</display-name>	
 	
-	<display-name>Simple Servlet Application</display-name>
+	<error-page>
+	    <exception-type>java.lang.Throwable</exception-type>
+	    <location>/jsp/error.jsp</location>
+	</error-page>
+
 </web-app>

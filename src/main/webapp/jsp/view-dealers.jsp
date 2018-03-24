@@ -13,6 +13,7 @@
         <div id="page-content-wrapper">
                 <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle"><i class="fa fa-bars"></i></a>
                 <span class="dealer-notifications">Registered dealers</span>
+                <button class="btn btn-primary logout">Logout</button>
         </div>
 
         <!-- /#page-content-wrapper -->
@@ -20,9 +21,9 @@
             <c:choose>
                 <c:when test="${not empty dealerList}">
                     <c:forEach var="dealer" items="${dealerList}">
-                        <div class="row request-row" id="record">
+                        <div class="row request-row  alert alert-info" id="record">
                             <div class="col-sm-2">
-                                 <p>DealerId# <span class="badge badge-primary" id="rid">${dealer.getCredentials().getUsername()}</span></p>
+                                 <p>Dealer Id <span class="badge badge-primary" id="rid">${dealer.getCredentials().getUsername()}</span></p>
                             </div>
                             <div class="col-sm-6">
                                 <h2>${dealer.getName()}</h2> 
@@ -32,14 +33,24 @@
                                   <li> <i class="fa fa-address-card"></i> ${dealer.getContactDetails().getAddress()}</li>
                                 </ul>
                             </div>
-                            <div class="col-sm-4">
-                                <h5><u>List of products sold</u></h5>
-                                <ul class="multiselect">
-                                    <c:forEach var="product" items="${dealer.getProducts()}">
-                                        <li>${product.getProductName()}</li>
-                                    </c:forEach>
-                                </ul>
-                            </div>
+                            <c:choose>
+                                <c:when test="${not empty dealer.getProducts()}">
+                                    <div class="col-sm-4">
+                                        <h5>List of products sold</h5>
+                                        <ul class="multiselect">
+                                            <c:forEach var="product" items="${dealer.getProducts()}">
+                                                <li>${product.getProductName()}</li>
+                                            </c:forEach>
+                                        </ul>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="col-sm-4">
+                                        <p class="alert alert-info">No products to display</p>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+                            
                         </div>
                     </c:forEach>
                 </c:when>
